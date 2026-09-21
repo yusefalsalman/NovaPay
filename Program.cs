@@ -59,8 +59,9 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-// DI 
+// DI ()
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITransferService, TransferService>();
 
 
 var app = builder.Build();

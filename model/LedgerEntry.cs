@@ -2,8 +2,8 @@ namespace NovaPay.Models;
 
 public enum EntryType
 {
-    Debit,
-    Credit,
+    Debit,  // Money deducted
+    Credit  // Money added
 }
 
 public class LedgerEntry
@@ -13,9 +13,14 @@ public class LedgerEntry
     public Guid WalletId { get; set; }
     public EntryType Type { get; set; }
     public decimal Amount { get; set; }
+    
+    // Tracks the wallet's balance immediately after this entry (essential for PDF bank statements)
+    public decimal BalanceAfter { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    // Navigation Properties
-    public Transaction? Transaction { get; set; }
-    public Wallet? Wallet { get; set; }
+    // Navigation Properties (JsonIgnore prevents infinite serialization loops)
+    public Transaction Transaction { get; set; } = null!;
+
+    public Wallet Wallet { get; set; } = null!;
 }

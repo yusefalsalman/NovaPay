@@ -95,6 +95,9 @@ public class NovaPayDbContext : DbContext
             entity.Property(l => l.Amount)
                   .HasPrecision(18, 4);
 
+            entity.Property(l => l.BalanceAfter)
+                  .HasPrecision(18, 4);
+
             entity.Property(l => l.Type)
                   .HasConversion<string>()
                   .HasMaxLength(10);

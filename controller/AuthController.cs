@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using NovaPay.Services;
-namespace NovaPay.Contoller;
+namespace NovaPay.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
