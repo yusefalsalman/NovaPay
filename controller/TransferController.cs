@@ -37,4 +37,3 @@ public class TransferController : ControllerBase
         return Ok(result.Response);
     }
 }
-

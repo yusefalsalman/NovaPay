@@ -77,6 +77,7 @@ public class TransferService : ITransferService
             var debitEntry = new LedgerEntry
             {
                 Transaction = transferTx,
+                TransactionId = transferTx.Id,
                 WalletId = sender.Wallet.Id,
                 Type = EntryType.Debit,
                 Amount = request.Amount,

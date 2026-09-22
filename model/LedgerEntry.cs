@@ -13,10 +13,7 @@ public class LedgerEntry
     public Guid WalletId { get; set; }
     public EntryType Type { get; set; }
     public decimal Amount { get; set; }
-    
-    // Tracks the wallet's balance immediately after this entry (essential for PDF bank statements)
     public decimal BalanceAfter { get; set; }
-
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     // Navigation Properties (JsonIgnore prevents infinite serialization loops)

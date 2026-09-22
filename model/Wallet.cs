@@ -9,7 +9,6 @@ public class Wallet
     public string Currency { get; set; } = "JOD";
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    // use for => 
     public uint Version { get; set; }
 
     // Navigation Properties

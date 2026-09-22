@@ -59,7 +59,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-// DI ()
+// DI
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITransferService, TransferService>();
 
@@ -73,7 +73,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
-
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers(); 
