@@ -6,7 +6,7 @@ public class Wallet
     public Guid UserId { get; set; }
     public string AccountNumber { get; set; } = string.Empty;
     public decimal Balance { get; set; } = 0.00m;
-    public string Currency { get; set; } = "JOD";
+    public string Currency { get; set; } = "usd";
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public uint Version { get; set; }

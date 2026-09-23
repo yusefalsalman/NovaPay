@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using NovaPay.Models;
+using Stripe;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using NovaPay.Data;
@@ -6,6 +8,7 @@ using NovaPay.Services;
 using NovaPay.Middlewares;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 
 builder.Services.AddDbContext<NovaPayDbContext>(options => options.UseNpgsql(connectionString));
+
+// 1. Bind Stripe settings from appsettings.Development.json
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
+// 2. Set the global SecretKey for Stripe.net SDK
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -61,8 +70,8 @@ builder.Services.AddAuthentication(options =>
 
 // DI
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ITransferService, TransferService>();
-
+builder.Services.AddScoped<ITransferService, NovaPay.Services.TransferService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();
 
