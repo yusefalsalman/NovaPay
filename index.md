@@ -46,19 +46,20 @@
 
 ---
 
+### ✅ Phase 3: External Top-Up & Gateway (Stripe) _(COMPLETED)_
+
+- [x] **3.1** Install `Stripe.net` and configure API keys
+- [x] **3.2** Implement `PaymentService` to create Stripe `PaymentIntent`
+- [x] **3.3** Implement `StripeWebhookController` (`payment_intent.succeeded` handler)
+- [x] **3.4** Verify webhook listening & idempotency with Stripe CLI
+
+---
+
 ### 🛑 📍 WE ARE STOPPED HERE 📍 🛑
 
 ---
 
-### ⏳ Phase 3: External Top-Up & Gateway (Stripe) _(NEXT STEP)_
-
-- [ ] **3.1** Install `Stripe.net` and configure API keys
-- [ ] **3.2** Implement `PaymentService` to create Stripe `PaymentIntent`
-- [ ] **3.3** Implement `StripeWebhookController` (`payment_intent.succeeded` handler)
-
----
-
-### ⏳ Phase 4: Transaction History & PDF Statements _(PENDING)_
+### ⏳ Phase 4: Transaction History & PDF Statements _(NEXT STEP)_
 
 - [ ] **4.1** `GET /api/transactions` with pagination and date/type filters
 - [ ] **4.2** PDF generation engine (`QuestPDF`) for receipts and monthly statements
