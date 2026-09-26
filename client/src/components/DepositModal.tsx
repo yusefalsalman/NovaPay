@@ -55,7 +55,6 @@ export const DepositModal: React.FC<DepositModalProps> = ({
     setError(null);
 
     try {
-      // 1. Confirm the PaymentIntent with Stripe and credit the PostgreSQL ledger atomically!
       await api.post(`/payments/confirm-intent/${intentData.paymentIntentId}`);
 
       confetti({
@@ -90,7 +89,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleReset}
-            className="fixed inset-0 bg-black/75 backdrop-blur-md"
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm"
           />
 
           <motion.div
@@ -98,32 +97,31 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative z-10 w-full max-w-lg glass-panel-glow rounded-3xl p-6 sm:p-8 text-white overflow-hidden"
+            className="relative z-10 w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 text-slate-800 shadow-2xl border border-slate-200/80 overflow-hidden"
           >
-            {/* Top decorative stripe */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-500 to-indigo-500" />
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600" />
 
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200">
                   <CreditCard className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold">Stripe Sandbox Top-Up</h3>
-                  <p className="text-xs text-slate-400">Card Payment Rail & Idempotent Webhook</p>
+                  <h3 className="text-lg font-bold text-slate-900">Stripe Sandbox Top-Up</h3>
+                  <p className="text-xs text-slate-500">Card Payment Rail & Idempotent Webhook</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={handleReset}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {error && (
-              <div className="mt-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
+              <div className="mt-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -132,7 +130,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             {step === 'amount' && (
               <form onSubmit={handleCreateIntent} className="mt-5 space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wider">
                     Deposit Amount ({currency})
                   </label>
                   <div className="relative">
@@ -144,20 +142,19 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                       required
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
-                      className="w-full pl-8 pr-4 py-3 rounded-xl bg-slate-900/80 border border-white/15 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-xl font-bold text-white placeholder-slate-600 transition-all font-mono"
+                      className="w-full pl-8 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600 text-xl font-bold text-slate-900 placeholder-slate-400 transition-all font-mono"
                     />
                   </div>
-                  {/* Preset Pills */}
                   <div className="flex gap-2 mt-2.5">
                     {presets.map((p) => (
                       <button
                         key={p}
                         type="button"
                         onClick={() => setAmount(p)}
-                        className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                        className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                           amount === p
-                            ? 'bg-emerald-500 text-slate-950 font-bold shadow-lg shadow-emerald-500/30'
-                            : 'bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-slate-300'
+                            ? 'bg-emerald-600 text-white font-bold shadow-xs'
+                            : 'bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700'
                         }`}
                       >
                         ${p}
@@ -166,11 +163,11 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/10 text-xs text-slate-400 flex items-start gap-2.5">
-                  <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-start gap-2.5">
+                  <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold text-slate-200">Stripe Sandbox Security:</span>
-                    <p className="mt-0.5">
+                    <span className="font-semibold text-slate-800">Stripe Sandbox Security:</span>
+                    <p className="mt-0.5 text-slate-500">
                       Card numbers are tokenized in Stripe iframe elements. Raw card data never touches NovaPay servers.
                     </p>
                   </div>
@@ -179,7 +176,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 disabled:opacity-50 transition-all"
+                  className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-600/25 disabled:opacity-50 transition-all cursor-pointer"
                 >
                   {loading ? (
                     <>
@@ -195,29 +192,28 @@ export const DepositModal: React.FC<DepositModalProps> = ({
 
             {step === 'checkout' && intentData && (
               <div className="mt-5 space-y-4">
-                <div className="p-4 rounded-2xl bg-slate-900/80 border border-white/10 text-xs space-y-2">
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Locked Deposit:</span>
-                    <span className="font-bold text-emerald-400 text-sm">${parseFloat(amount).toFixed(2)} USD</span>
+                    <span className="text-slate-500">Locked Deposit:</span>
+                    <span className="font-bold text-emerald-600 text-sm">${parseFloat(amount).toFixed(2)} USD</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">PaymentIntent ID:</span>
-                    <span className="font-mono text-indigo-300 select-all">{intentData.paymentIntentId}</span>
+                    <span className="text-slate-500">PaymentIntent ID:</span>
+                    <span className="font-mono text-indigo-600 font-medium select-all">{intentData.paymentIntentId}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Cents in Stripe:</span>
-                    <span className="font-mono text-slate-300">{intentData.amountInCents}</span>
+                    <span className="text-slate-500">Cents in Stripe:</span>
+                    <span className="font-mono text-slate-700">{intentData.amountInCents}</span>
                   </div>
                 </div>
 
-                {/* Simulated Stripe Card Element */}
-                <div className="p-4 rounded-2xl bg-slate-900/90 border border-emerald-500/30 space-y-3">
-                  <div className="flex items-center justify-between text-xs font-semibold text-slate-300">
+                <div className="p-4 rounded-2xl bg-slate-50 border border-emerald-300 space-y-3">
+                  <div className="flex items-center justify-between text-xs font-semibold text-slate-700">
                     <span>Card Information (Test Mode)</span>
-                    <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px]">4242 Card</span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">4242 Card</span>
                   </div>
 
-                  <div className="px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/10 text-sm font-mono text-slate-200 flex items-center justify-between">
+                  <div className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-mono text-slate-800 flex items-center justify-between shadow-xs">
                     <span>4242 •••• •••• 4242</span>
                     <span className="text-xs text-slate-400">12/28 • CVC 123</span>
                   </div>
@@ -227,7 +223,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep('amount')}
-                    className="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition-colors"
+                    className="flex-1 py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-colors cursor-pointer"
                   >
                     Back
                   </button>
@@ -235,7 +231,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                     type="button"
                     onClick={handleSimulatePayment}
                     disabled={loading}
-                    className="flex-2 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 disabled:opacity-50 transition-all"
+                    className="flex-2 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-600/25 disabled:opacity-50 transition-all cursor-pointer"
                   >
                     {loading ? (
                       <>
@@ -244,7 +240,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                       </>
                     ) : (
                       <>
-                        <Sparkles className="w-4 h-4 text-emerald-300" />
+                        <Sparkles className="w-4 h-4 text-emerald-200" />
                         <span>Authorize ${parseFloat(amount).toFixed(2)}</span>
                       </>
                     )}
@@ -259,21 +255,21 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                  className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center mx-auto mb-4"
+                  className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto mb-4"
                 >
                   <CheckCircle2 className="w-8 h-8" />
                 </motion.div>
-                <h4 className="text-xl font-extrabold text-white">Deposit Succeeded!</h4>
-                <p className="text-sm text-slate-400 mt-1">
-                  Added <span className="font-bold text-white">${parseFloat(amount).toFixed(2)} {currency}</span> to your wallet.
+                <h4 className="text-xl font-extrabold text-slate-900">Deposit Succeeded!</h4>
+                <p className="text-sm text-slate-600 mt-1">
+                  Added <span className="font-bold text-slate-900">${parseFloat(amount).toFixed(2)} {currency}</span> to your wallet.
                 </p>
-                <p className="text-xs text-indigo-400 mt-2 font-mono">
+                <p className="text-xs text-indigo-600 mt-2 font-mono font-medium">
                   Ledger Credited via Stripe Webhook Event
                 </p>
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-full mt-6 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold transition-all"
+                  className="w-full mt-6 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md shadow-emerald-600/25 transition-all cursor-pointer"
                 >
                   Return to Dashboard
                 </button>

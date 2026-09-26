@@ -58,7 +58,6 @@ export const TransferModal: React.FC<TransferModalProps> = ({
         description: note.trim() || undefined,
       });
 
-      // Blast celebratory confetti!
       confetti({
         particleCount: 80,
         spread: 70,
@@ -89,103 +88,97 @@ export const TransferModal: React.FC<TransferModalProps> = ({
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleReset}
-            className="fixed inset-0 bg-black/75 backdrop-blur-md"
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm"
           />
 
-          {/* Modal Card */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative z-10 w-full max-w-lg glass-panel-glow rounded-3xl p-6 sm:p-8 text-white overflow-hidden"
+            className="relative z-10 w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 text-slate-800 shadow-2xl border border-slate-200/80 overflow-hidden"
           >
-            {/* Ambient accent top bar */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400" />
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-indigo-600 to-emerald-500" />
 
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200">
                   <Send className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold">Instant P2P Transfer</h3>
-                  <p className="text-xs text-slate-400">Concurrency-safe Double-Entry Settlement</p>
+                  <h3 className="text-lg font-bold text-slate-900">Instant P2P Transfer</h3>
+                  <p className="text-xs text-slate-500">Concurrency-safe Double-Entry Settlement</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={handleReset}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {successData ? (
-              /* Success State */
               <div className="py-6 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                  className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center mx-auto mb-4"
+                  className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto mb-4"
                 >
                   <CheckCircle2 className="w-8 h-8" />
                 </motion.div>
 
-                <h4 className="text-xl font-extrabold text-white">Transfer Succeeded!</h4>
-                <p className="text-sm text-slate-400 mt-1">
-                  Sent <span className="font-bold text-white">${successData.amount.toFixed(2)} {currency}</span> to{' '}
-                  <span className="font-mono text-indigo-300">{successData.recipientAccountNumber}</span>
+                <h4 className="text-xl font-extrabold text-slate-900">Transfer Succeeded!</h4>
+                <p className="text-sm text-slate-600 mt-1">
+                  Sent <span className="font-bold text-slate-900">${successData.amount.toFixed(2)} {currency}</span> to{' '}
+                  <span className="font-mono text-indigo-600 font-semibold">{successData.recipientAccountNumber}</span>
                 </p>
 
-                <div className="my-6 p-4 rounded-2xl bg-slate-900/60 border border-white/10 text-left text-xs space-y-2">
-                  <div className="flex justify-between text-slate-400">
+                <div className="my-6 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left text-xs space-y-2">
+                  <div className="flex justify-between text-slate-500">
                     <span>Transaction Ref:</span>
-                    <span className="font-mono text-white select-all">{successData.referenceId}</span>
+                    <span className="font-mono text-slate-800 font-medium select-all">{successData.referenceId}</span>
                   </div>
-                  <div className="flex justify-between text-slate-400">
+                  <div className="flex justify-between text-slate-500">
                     <span>New Balance:</span>
-                    <span className="font-bold text-emerald-400">${successData.remainingBalance.toFixed(2)}</span>
+                    <span className="font-bold text-emerald-600">${successData.remainingBalance.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-400">
+                  <div className="flex justify-between text-slate-500">
                     <span>Ledger Status:</span>
-                    <span className="text-indigo-400 font-medium">Double-Entry Immutably Balanced</span>
+                    <span className="text-indigo-600 font-semibold">Double-Entry Immutably Balanced</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-semibold shadow-lg shadow-indigo-600/30 transition-all"
+                  className="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md shadow-indigo-600/25 transition-all cursor-pointer"
                 >
                   Done
                 </button>
               </div>
             ) : (
-              /* Form State */
               <form onSubmit={handleTransfer} className="mt-5 space-y-4">
                 {error && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2"
+                    className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs flex items-center gap-2"
                   >
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{error}</span>
                   </motion.div>
                 )}
 
-                {/* Recipient */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wider">
                     Recipient Identifier
                   </label>
                   <input
@@ -194,16 +187,15 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                     value={recipient}
                     onChange={(e) => setRecipient(e.target.value)}
                     placeholder="Account Number (NP-2026-...) or Email"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-white/15 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 text-sm text-white placeholder-slate-500 transition-all font-mono"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 text-sm text-slate-900 placeholder-slate-400 transition-all font-mono"
                   />
                 </div>
 
-                {/* Amount */}
                 <div>
                   <div className="flex justify-between text-xs mb-1.5">
-                    <span className="font-semibold text-slate-300 uppercase tracking-wider">Amount ({currency})</span>
-                    <span className="text-slate-400">
-                      Balance: <span className="font-bold text-slate-200">${userBalance.toFixed(2)}</span>
+                    <span className="font-semibold text-slate-700 uppercase tracking-wider">Amount ({currency})</span>
+                    <span className="text-slate-500">
+                      Balance: <span className="font-bold text-slate-800">${userBalance.toFixed(2)}</span>
                     </span>
                   </div>
                   <div className="relative">
@@ -216,25 +208,24 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder="0.00"
-                      className="w-full pl-8 pr-16 py-2.5 rounded-xl bg-slate-900/80 border border-white/15 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 text-lg font-bold text-white placeholder-slate-600 transition-all font-mono"
+                      className="w-full pl-8 pr-16 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 text-lg font-bold text-slate-900 placeholder-slate-400 transition-all font-mono"
                     />
                     <button
                       type="button"
                       onClick={() => setAmount(userBalance.toFixed(2))}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-xs font-bold transition-colors"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition-colors cursor-pointer"
                     >
                       MAX
                     </button>
                   </div>
 
-                  {/* Preset Pills */}
                   <div className="flex gap-2 mt-2">
                     {presets.map((p) => (
                       <button
                         key={p}
                         type="button"
                         onClick={() => setAmount(p.toString())}
-                        className="flex-1 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-xs font-medium text-slate-300 transition-all"
+                        className="flex-1 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-medium text-slate-700 transition-all cursor-pointer"
                       >
                         +${p}
                       </button>
@@ -242,9 +233,8 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                   </div>
                 </div>
 
-                {/* Note */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wider">
                     Reference Note (Optional)
                   </label>
                   <input
@@ -252,26 +242,24 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     placeholder="e.g. Dinner share, rent, coffee"
-                    className="w-full px-4 py-2 rounded-xl bg-slate-900/80 border border-white/15 focus:border-indigo-500 focus:outline-none text-xs text-white placeholder-slate-500"
+                    className="w-full px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 focus:outline-none text-xs text-slate-900 placeholder-slate-400"
                   />
                 </div>
 
-                {/* Double-Entry Preview Box */}
-                <div className="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20 text-xs text-slate-300 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-rose-400 font-semibold">
+                <div className="p-3 rounded-xl bg-indigo-50/60 border border-indigo-100 text-xs text-slate-600 flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-rose-600 font-semibold">
                     <span>Debit: -${parseFloat(amount) || 0}</span>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-slate-500" />
-                  <div className="flex items-center gap-2 text-emerald-400 font-semibold">
+                  <ArrowRight className="w-4 h-4 text-slate-400" />
+                  <div className="flex items-center gap-2 text-emerald-600 font-semibold">
                     <span>Credit: +${parseFloat(amount) || 0}</span>
                   </div>
                 </div>
 
-                {/* Submit button */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 disabled:opacity-50 transition-all"
+                  className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold flex items-center justify-center gap-2 shadow-md shadow-indigo-600/25 disabled:opacity-50 transition-all cursor-pointer"
                 >
                   {loading ? (
                     <>

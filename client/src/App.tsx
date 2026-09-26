@@ -170,7 +170,7 @@ export const App: React.FC = () => {
   const currentAccount = user.wallet?.accountNumber ?? 'NP-2026-••••••';
 
   return (
-    <div className="relative min-h-screen bg-[#070b14] text-slate-100 flex flex-col">
+    <div className="relative min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col">
       <CyberBackground />
 
       <Navbar
@@ -206,84 +206,84 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsTransferOpen(true)}
-                className="glass-card-interactive p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer"
+                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-indigo-300 transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
                   <Send className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-white">Send P2P</span>
-                <span className="text-[10px] text-slate-400 mt-0.5">Instant Transfer</span>
+                <span className="text-xs font-bold text-slate-900">Send P2P</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">Instant Transfer</span>
               </button>
 
               {/* Stripe Deposit */}
               <button
                 type="button"
                 onClick={() => setIsDepositOpen(true)}
-                className="glass-card-interactive p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer"
+                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-emerald-300 transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
                   <CreditCard className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-white">Top-Up</span>
-                <span className="text-[10px] text-slate-400 mt-0.5">Stripe Gateway</span>
+                <span className="text-xs font-bold text-slate-900">Top-Up</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">Stripe Gateway</span>
               </button>
 
               {/* PDF Statement */}
               <button
                 type="button"
                 onClick={() => setIsStatementOpen(true)}
-                className="glass-card-interactive p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer"
+                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-blue-300 transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
                   <FileText className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-white">Statement</span>
-                <span className="text-[10px] text-slate-400 mt-0.5">QuestPDF Export</span>
+                <span className="text-xs font-bold text-slate-900">Statement</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">QuestPDF Export</span>
               </button>
 
               {/* AI Advisor */}
               <button
                 type="button"
                 onClick={() => setIsAiOpen(true)}
-                className="glass-card-interactive p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer"
+                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-purple-300 transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 border border-purple-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
                   <BrainCircuit className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-white">AI Insights</span>
-                <span className="text-[10px] text-slate-400 mt-0.5">Gemini Advisor</span>
+                <span className="text-xs font-bold text-slate-900">AI Insights</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">Gemini Advisor</span>
               </button>
             </div>
 
             {/* Platform Security & Concurrency Badges */}
-            <div className="glass-panel rounded-2xl p-4 border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div className="bg-white/90 backdrop-blur-md rounded-2xl p-4 border border-slate-200 shadow-xs grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-bold text-white leading-tight">Double-Entry</p>
-                  <p className="text-[10px] text-slate-400">Strict Debit/Credit Pairing</p>
+                  <p className="font-bold text-slate-900 leading-tight">Double-Entry</p>
+                  <p className="text-[10px] text-slate-500">Strict Debit/Credit Pairing</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0">
                   <Cpu className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-bold text-white leading-tight">Concurrency Safe</p>
-                  <p className="text-[10px] text-slate-400">PostgreSQL Isolation</p>
+                  <p className="font-bold text-slate-900 leading-tight">Concurrency Safe</p>
+                  <p className="text-[10px] text-slate-500">PostgreSQL Isolation</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-purple-50 border border-purple-200 text-purple-600 flex items-center justify-center shrink-0">
                   <Activity className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-bold text-white leading-tight">Stripe Idempotent</p>
-                  <p className="text-[10px] text-slate-400">Zero Double-Spend</p>
+                  <p className="font-bold text-slate-900 leading-tight">Stripe Idempotent</p>
+                  <p className="text-[10px] text-slate-500">Zero Double-Spend</p>
                 </div>
               </div>
             </div>

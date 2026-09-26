@@ -48,23 +48,23 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
     .reduce((acc, curr) => acc + curr.amount, 0);
 
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-white/10 text-white shadow-xl flex flex-col justify-between">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4">
+    <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 border border-slate-200/90 shadow-sm text-slate-800 flex flex-col justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
-          <h3 className="text-base font-bold text-white flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-indigo-400" />
+          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+            <TrendingUp className="w-4 h-4 text-indigo-600" />
             <span>Balance & Cash Flow Dynamics</span>
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">Real-time ledger curve</p>
+          <p className="text-xs text-slate-500 mt-0.5">Real-time ledger curve</p>
         </div>
 
         {/* Mini stats */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
             <ArrowDownLeft className="w-3.5 h-3.5" />
             <span>+${totalCredits.toFixed(2)}</span>
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
             <ArrowUpRight className="w-3.5 h-3.5" />
             <span>-${totalDebits.toFixed(2)}</span>
           </div>
@@ -72,25 +72,25 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
       </div>
 
       {/* Chart */}
-      <div className="h-44 w-full pt-2">
+      <div className="h-44 w-full pt-4">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
-              <linearGradient id="balanceGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#6366f1" stopOpacity={0.4} />
-                <stop offset="95%" stopColor="#6366f1" stopOpacity={0.0} />
+              <linearGradient id="lightBalanceGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.25} />
+                <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff0a" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
             <XAxis 
               dataKey="name" 
-              stroke="#64748b" 
+              stroke="#94a3b8" 
               fontSize={10}
               tickLine={false}
               axisLine={false}
             />
             <YAxis 
-              stroke="#64748b" 
+              stroke="#94a3b8" 
               fontSize={10} 
               tickLine={false}
               axisLine={false}
@@ -98,22 +98,22 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0f172a',
-                borderColor: 'rgba(255,255,255,0.1)',
+                backgroundColor: '#ffffff',
+                borderColor: '#e2e8f0',
                 borderRadius: '12px',
                 fontSize: '12px',
-                color: '#fff',
-                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
+                color: '#0f172a',
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.08)',
               }}
               formatter={(value: any) => [`$${Number(value).toFixed(2)} ${currency}`, 'Balance After']}
             />
             <Area
               type="monotone"
               dataKey="balance"
-              stroke="#6366f1"
+              stroke="#4f46e5"
               strokeWidth={2.5}
               fillOpacity={1}
-              fill="url(#balanceGradient)"
+              fill="url(#lightBalanceGradient)"
             />
           </AreaChart>
         </ResponsiveContainer>

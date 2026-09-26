@@ -59,25 +59,25 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({
         }}
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.2 }}
-        className="relative h-60 w-full rounded-2xl p-6 shadow-2xl overflow-hidden cursor-pointer select-none card-gradient-purple border border-white/20"
+        className="relative h-60 w-full rounded-3xl p-6 shadow-2xl shadow-indigo-950/20 overflow-hidden cursor-pointer select-none card-gradient-purple border border-white/25"
       >
         {/* Holographic light sweep overlay */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/15 to-transparent pointer-events-none opacity-70" />
 
         {/* Ambient glow accent */}
-        <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-blue-400/20 blur-2xl pointer-events-none" />
+        <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-indigo-400/25 blur-2xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col justify-between h-full text-white">
           {/* Top Row: Brand & Chip */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-7 rounded bg-amber-400/90 border border-amber-200/50 shadow-inner flex items-center justify-center">
-                <div className="w-8 h-4 border border-amber-700/40 rounded-sm grid grid-cols-2 gap-0.5" />
+              <div className="w-10 h-7 rounded bg-amber-400/95 border border-amber-200/60 shadow-inner flex items-center justify-center">
+                <div className="w-8 h-4 border border-amber-800/40 rounded-sm grid grid-cols-2 gap-0.5" />
               </div>
-              <Wifi className="w-5 h-5 text-white/70 rotate-90" />
+              <Wifi className="w-5 h-5 text-white/80 rotate-90" />
             </div>
 
-            <div className="flex items-center gap-1.5 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-xs font-semibold tracking-wider text-emerald-400">
+            <div className="flex items-center gap-1.5 bg-black/35 backdrop-blur-md px-3 py-1 rounded-full border border-white/15 text-xs font-semibold tracking-wider text-emerald-400 shadow-xs">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>ACTIVE LEDGER</span>
             </div>
@@ -85,7 +85,7 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({
 
           {/* Middle: Live Balance */}
           <div className="my-auto">
-            <div className="flex items-center gap-2 text-xs font-medium text-purple-200 tracking-wide">
+            <div className="flex items-center gap-2 text-xs font-medium text-indigo-200 tracking-wide">
               <span>AVAILABLE BALANCE</span>
               <button
                 type="button"
@@ -93,7 +93,7 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({
                   e.stopPropagation();
                   setShowBalance(!showBalance);
                 }}
-                className="hover:text-white transition-colors"
+                className="hover:text-white transition-colors cursor-pointer"
               >
                 {showBalance ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
               </button>
@@ -103,14 +103,14 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({
               <span>
                 {showBalance ? balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '••••••'}
               </span>
-              <span className="text-sm font-semibold text-purple-200/80 ml-1">{currency}</span>
+              <span className="text-sm font-semibold text-indigo-200/90 ml-1">{currency}</span>
             </div>
           </div>
 
           {/* Bottom Row: Account Number & Cardholder */}
           <div className="flex items-end justify-between pt-2">
             <div>
-              <p className="text-[10px] uppercase font-bold text-purple-200/60 tracking-wider">Account Tag / Number</p>
+              <p className="text-[10px] uppercase font-bold text-indigo-200/70 tracking-wider">Account Number</p>
               <div className="flex items-center gap-2 mt-0.5">
                 <span className="font-mono text-sm tracking-wider font-semibold text-white/95">
                   {accountNumber || 'NP-2026-••••••'}
@@ -121,7 +121,7 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({
                     e.stopPropagation();
                     copyAccount();
                   }}
-                  className="p-1 rounded hover:bg-white/10 text-white/80 transition-colors"
+                  className="p-1 rounded-lg hover:bg-white/15 text-white/80 transition-colors cursor-pointer"
                   title="Copy account number"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -135,7 +135,7 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({
             {/* NovaPay Logo Mark */}
             <div className="flex items-center">
               <div className="text-right">
-                <span className="text-lg font-black tracking-tighter italic">Nova<span className="text-blue-300">Pay</span></span>
+                <span className="text-lg font-black tracking-tighter italic">Nova<span className="text-indigo-300">Pay</span></span>
               </div>
             </div>
           </div>
