@@ -33,24 +33,14 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.SetIsOriginAllowed(origin =>
-              {
-                  if (string.IsNullOrEmpty(origin)) return false;
-                  try
-                  {
-                      var uri = new Uri(origin);
-                      return uri.Host == "localhost"
-                          || uri.Host.EndsWith("netlify.app", StringComparison.OrdinalIgnoreCase)
-                          || uri.Host.EndsWith("onrender.com", StringComparison.OrdinalIgnoreCase);
-                  }
-                  catch
-                  {
-                      return false;
-                  }
-              })
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+policy.WithOrigins(
+        "http://localhost:5173",
+        "https://novapayyousefsalman.netlify.app",
+        "https://novapayyousefsalmanweb.netlify.app"
+      )
+      .AllowAnyHeader()
+      .AllowAnyMethod()
+      .AllowCredentials();
     });
 });
 builder.Services.AddControllers()
