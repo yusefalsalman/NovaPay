@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Receipt, Download, Calendar, Loader2, CheckCircle2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import { api } from '../lib/api';
 
 interface StatementDownloadModalProps {
@@ -14,6 +15,7 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
   onClose,
   accountNumber,
 }) => {
+  const { t } = useLanguage();
   const [rangePreset, setRangePreset] = useState<'30' | '60' | '90' | 'custom'>('30');
   const [startDate, setStartDate] = useState(
     new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
@@ -85,14 +87,14 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
                   <Receipt className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900">Account Statement</h3>
-                  <p className="text-xs text-slate-500">QuestPDF Vector Document Engine</p>
+                  <h3 className="text-lg font-bold text-slate-900">{t('statementTitle')}</h3>
+                  <p className="text-xs text-slate-500">{t('statementSubtitle')}</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -101,41 +103,41 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
             <div className="mt-5 space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-600 mb-2 uppercase tracking-wider">
-                  Quick Timeframes
+                  {t('quickTimeframes')}
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     type="button"
                     onClick={() => handlePreset(30, '30')}
-                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all ${
+                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                       rangePreset === '30'
                         ? 'bg-[oklch(52%_0.17_232.661)] border-[oklch(52%_0.17_232.661)] text-white shadow-sm'
                         : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    Last 30 Days
+                    {t('last30Days')}
                   </button>
                   <button
                     type="button"
                     onClick={() => handlePreset(60, '60')}
-                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all ${
+                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                       rangePreset === '60'
                         ? 'bg-[oklch(52%_0.17_232.661)] border-[oklch(52%_0.17_232.661)] text-white shadow-sm'
                         : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    Last 60 Days
+                    {t('last60Days')}
                   </button>
                   <button
                     type="button"
                     onClick={() => handlePreset(90, '90')}
-                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all ${
+                    className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                       rangePreset === '90'
                         ? 'bg-[oklch(52%_0.17_232.661)] border-[oklch(52%_0.17_232.661)] text-white shadow-sm'
                         : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    Last 90 Days
+                    {t('last90Days')}
                   </button>
                 </div>
               </div>
@@ -143,7 +145,7 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
               {/* Custom Date Pickers */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <div>
-                  <label className="block text-xs font-medium text-slate-600 mb-1">From Date</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">{t('fromDate')}</label>
                   <div className="relative">
                     <input
                       type="date"
@@ -157,7 +159,7 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-600 mb-1">To Date</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">{t('toDate')}</label>
                   <div className="relative">
                     <input
                       type="date"
@@ -175,11 +177,11 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
               <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 space-y-1">
                 <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
                   <Calendar className="w-3.5 h-3.5 text-[oklch(50%_0.17_232.661)]" />
-                  <span>Report Includes:</span>
+                  <span>{t('reportIncludes')}</span>
                 </div>
-                <p>• Opening Balance & Closing Balance</p>
-                <p>• Total Credits (Inflow) & Total Debits (Outflow)</p>
-                <p>• Itemized Double-Entry audit table with reference IDs</p>
+                <p>{t('openingClosingBal')}</p>
+                <p>{t('totalCreditsDebits')}</p>
+                <p>{t('itemizedAudit')}</p>
               </div>
 
               <button
@@ -191,17 +193,17 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
                 {loading ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Compiling PDF Document...</span>
+                    <span>{t('compilingPdf')}</span>
                   </>
                 ) : downloadSuccess ? (
                   <>
                     <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                    <span>Downloaded Successfully!</span>
+                    <span>{t('downloadSuccess')}</span>
                   </>
                 ) : (
                   <>
                     <Download className="w-4 h-4" />
-                    <span>Download PDF Statement</span>
+                    <span>{t('downloadStatementBtn')}</span>
                   </>
                 )}
               </button>

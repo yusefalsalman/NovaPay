@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, PlusCircle, Lock, CheckCircle2, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLanguage } from '../context/LanguageContext';
 import { api } from '../lib/api';
 import type { CreatePaymentIntentResponse } from '../types';
 
@@ -18,6 +19,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
   currency,
   onDepositSuccess,
 }) => {
+  const { t } = useLanguage();
   const [amount, setAmount] = useState('50.00');
   const [step, setStep] = useState<'amount' | 'checkout' | 'success'>('amount');
   const [loading, setLoading] = useState(false);
@@ -107,8 +109,8 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                   <PlusCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900">Stripe Sandbox Top-Up</h3>
-                  <p className="text-xs text-slate-500">Card Payment Rail & Idempotent Webhook</p>
+                  <h3 className="text-lg font-bold text-slate-900">{t('stripeModalTitle')}</h3>
+                  <p className="text-xs text-slate-500">{t('stripeModalSubtitle')}</p>
                 </div>
               </div>
               <button
@@ -131,10 +133,10 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               <form onSubmit={handleCreateIntent} className="mt-5 space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-600 mb-2 uppercase tracking-wider">
-                    Deposit Amount ({currency})
+                    {t('depositAmount')} ({currency})
                   </label>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                    <span className="absolute start-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
                     <input
                       type="number"
                       step="0.01"
@@ -142,7 +144,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                       required
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
-                      className="w-full pl-8 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-xl font-bold text-slate-900 placeholder-slate-400 transition-all font-mono"
+                      className="w-full ps-8 pe-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-xl font-bold text-slate-900 placeholder-slate-400 transition-all font-mono"
                     />
                   </div>
                   <div className="flex gap-2 mt-2.5">
@@ -166,9 +168,9 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                 <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 flex items-start gap-2.5">
                   <Lock className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold text-slate-800">Stripe Sandbox Security:</span>
+                    <span className="font-semibold text-slate-800">{t('stripeSecurityTitle')}</span>
                     <p className="mt-0.5 text-slate-500">
-                      Card numbers are tokenized in Stripe iframe elements. Raw card data never touches NovaPay servers.
+                      {t('stripeSecurityText')}
                     </p>
                   </div>
                 </div>
@@ -181,10 +183,10 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                   {loading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Creating PaymentIntent...</span>
+                      <span>{t('creatingPaymentIntent')}</span>
                     </>
                   ) : (
-                    <span>Proceed to Card Checkout</span>
+                    <span>{t('proceedCheckout')}</span>
                   )}
                 </button>
               </form>
@@ -194,8 +196,8 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               <div className="mt-5 space-y-4">
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Locked Deposit:</span>
-                    <span className="font-bold text-emerald-600 text-sm">${parseFloat(amount).toFixed(2)} USD</span>
+                    <span className="text-slate-500">{t('lockedDepositLabel')}</span>
+                    <span dir="ltr" className="font-bold text-emerald-600 text-sm">${parseFloat(amount).toFixed(2)} USD</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">PaymentIntent ID:</span>
@@ -209,11 +211,11 @@ export const DepositModal: React.FC<DepositModalProps> = ({
 
                 <div className="p-4 rounded-2xl bg-slate-50 border border-emerald-200 space-y-3">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-700">
-                    <span>Card Information (Test Mode)</span>
-                    <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold">4242 Card</span>
+                    <span>{t('cardInfoTestLabel')}</span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold">{t('testCardBadge')}</span>
                   </div>
 
-                  <div className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-mono text-slate-800 flex items-center justify-between shadow-xs">
+                  <div dir="ltr" className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-mono text-slate-800 flex items-center justify-between shadow-xs">
                     <span>4242 •••• •••• 4242</span>
                     <span className="text-xs text-slate-500">12/28 • CVC 123</span>
                   </div>
@@ -225,7 +227,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                     onClick={() => setStep('amount')}
                     className="flex-1 py-3 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold transition-colors cursor-pointer"
                   >
-                    Back
+                    {t('backBtn')}
                   </button>
                   <button
                     type="button"
@@ -236,12 +238,12 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                     {loading ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Confirming with Stripe...</span>
+                        <span>{t('confirmingWithStripe')}</span>
                       </>
                     ) : (
                       <>
-                        <ArrowRight className="w-4 h-4 text-emerald-100" />
-                        <span>Authorize ${parseFloat(amount).toFixed(2)}</span>
+                        <ArrowRight className="w-4 h-4 text-emerald-100 rtl:rotate-180" />
+                        <span dir="ltr">{t('authorizeBtn')} ${parseFloat(amount).toFixed(2)}</span>
                       </>
                     )}
                   </button>
@@ -259,19 +261,19 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                 >
                   <CheckCircle2 className="w-8 h-8" />
                 </motion.div>
-                <h4 className="text-xl font-extrabold text-slate-900">Deposit Succeeded!</h4>
+                <h4 className="text-xl font-extrabold text-slate-900">{t('depositSucceeded')}</h4>
                 <p className="text-sm text-slate-600 mt-1">
-                  Added <span className="font-bold text-slate-900">${parseFloat(amount).toFixed(2)} {currency}</span> to your wallet.
+                  {t('addedToWallet')} <span dir="ltr" className="font-bold text-slate-900">${parseFloat(amount).toFixed(2)} {currency}</span> {t('toYourWallet')}
                 </p>
                 <p className="text-xs text-[oklch(45%_0.17_232.661)] mt-2 font-mono font-medium">
-                  Ledger Credited via Stripe Webhook Event
+                  {t('ledgerCreditedWebhook')}
                 </p>
                 <button
                   type="button"
                   onClick={handleReset}
                   className="w-full mt-6 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md shadow-emerald-600/25 transition-all cursor-pointer"
                 >
-                  Return to Dashboard
+                  {t('returnToDashboard')}
                 </button>
               </div>
             )}

@@ -18,10 +18,12 @@ import { AiAdvisorDrawer } from './components/AiAdvisorDrawer';
 import { LedgerTable } from './components/LedgerTable';
 import { AnalyticsChart } from './components/AnalyticsChart';
 import { AuthScreen } from './components/AuthScreen';
+import { useLanguage } from './context/LanguageContext';
 import { api } from './lib/api';
 import type { User, TransactionHistoryItem, PagedResult } from './types';
 
 export const App: React.FC = () => {
+  const { t } = useLanguage();
   // Auth state
   const [token, setToken] = useState<string | null>(localStorage.getItem('novapay_token'));
   const [user, setUser] = useState<User | null>(() => {
@@ -141,7 +143,7 @@ export const App: React.FC = () => {
   // If unauthenticated, show Auth Screen
   if (!token || !user) {
     return (
-      <main className="relative min-h-screen bg-[#070b14] overflow-hidden">
+      <main className="relative min-h-screen bg-white overflow-hidden">
         <CyberBackground />
         <AuthScreen
           onAuthSuccess={(data) => {
@@ -209,10 +211,10 @@ export const App: React.FC = () => {
                 className="bg-white/95 backdrop-blur-md border border-[oklch(88%_0.07_232.661/0.7)] p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-[oklch(74.6%_0.16_232.661)] hover:scale-[1.02] transition-all"
               >
                 <div className="w-11 h-11 rounded-xl bg-[oklch(96%_0.03_232.661)] text-[oklch(50%_0.17_232.661)] border border-[oklch(85%_0.08_232.661)] flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <ArrowUpRight className="w-5 h-5" />
+                  <ArrowUpRight className="w-5 h-5 rtl:rotate-90" />
                 </div>
-                <span className="text-xs font-bold text-slate-900">Transfer</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Instant P2P</span>
+                <span className="text-xs font-bold text-slate-900">{t('transfer')}</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">{t('instantP2P')}</span>
               </button>
 
               {/* Stripe Deposit */}
@@ -224,8 +226,8 @@ export const App: React.FC = () => {
                 <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
                   <PlusCircle className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-slate-900">Deposit</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Card Gateway</span>
+                <span className="text-xs font-bold text-slate-900">{t('deposit')}</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">{t('cardGateway')}</span>
               </button>
 
               {/* PDF Statement */}
@@ -237,8 +239,8 @@ export const App: React.FC = () => {
                 <div className="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 border border-sky-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
                   <Receipt className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-slate-900">Statement</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Vector PDF</span>
+                <span className="text-xs font-bold text-slate-900">{t('statement')}</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">{t('vectorPdf')}</span>
               </button>
 
               {/* Ledger Intelligence */}
@@ -250,8 +252,8 @@ export const App: React.FC = () => {
                 <div className="w-11 h-11 rounded-xl bg-[oklch(96%_0.03_232.661)] text-[oklch(50%_0.17_232.661)] border border-[oklch(85%_0.08_232.661)] flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
                   <SlidersHorizontal className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-slate-900">Analytics</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Risk & Velocity</span>
+                <span className="text-xs font-bold text-slate-900">{t('analytics')}</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">{t('riskVelocity')}</span>
               </button>
             </div>
 
@@ -262,8 +264,8 @@ export const App: React.FC = () => {
                   <Scale className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-bold text-slate-900 leading-tight">Double-Entry</p>
-                  <p className="text-[10px] text-slate-500">Strict Debit/Credit Pairing</p>
+                  <p className="font-bold text-slate-900 leading-tight">{t('doubleEntryBadge')}</p>
+                  <p className="text-[10px] text-slate-500">{t('doubleEntryDesc')}</p>
                 </div>
               </div>
 
@@ -272,8 +274,8 @@ export const App: React.FC = () => {
                   <Database className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-bold text-slate-900 leading-tight">Concurrency Safe</p>
-                  <p className="text-[10px] text-slate-500">PostgreSQL Isolation</p>
+                  <p className="font-bold text-slate-900 leading-tight">{t('concurrencySafe')}</p>
+                  <p className="text-[10px] text-slate-500">{t('concurrencySafeDesc')}</p>
                 </div>
               </div>
 
@@ -282,8 +284,8 @@ export const App: React.FC = () => {
                   <KeyRound className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-bold text-slate-900 leading-tight">Stripe Idempotent</p>
-                  <p className="text-[10px] text-slate-500">Zero Double-Spend</p>
+                  <p className="font-bold text-slate-900 leading-tight">{t('stripeIdempotent')}</p>
+                  <p className="text-[10px] text-slate-500">{t('stripeIdempotentDesc')}</p>
                 </div>
               </div>
             </div>

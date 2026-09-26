@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Filter
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import type { TransactionHistoryItem, PagedResult } from '../types';
 
 interface LedgerTableProps {
@@ -29,6 +30,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
   filterType,
   onFilterChange,
 }) => {
+  const { t } = useLanguage();
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const copyRef = (refId: string) => {
@@ -43,12 +45,12 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/80">
         <div>
           <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <span>Immutable Ledger Activity</span>
+            <span>{t('immutableLedger')}</span>
             <span className="text-xs px-2.5 py-0.5 rounded-full bg-[oklch(96%_0.03_232.661)] text-[oklch(45%_0.17_232.661)] border border-[oklch(88%_0.07_232.661)] font-mono font-semibold">
-              Double-Entry
+              {t('doubleEntryBadge')}
             </span>
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">Live verifiable audit entries for your account</p>
+          <p className="text-xs text-slate-500 mt-0.5">{t('verifiableAudit')}</p>
         </div>
 
         {/* Filter Pills */}
@@ -62,7 +64,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            All
+            {t('all')}
           </button>
           <button
             type="button"
@@ -74,7 +76,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
             }`}
           >
             <ArrowDownLeft className="w-3.5 h-3.5" />
-            <span>Credits</span>
+            <span>{t('credits')}</span>
           </button>
           <button
             type="button"
@@ -85,8 +87,8 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                 : 'text-slate-600 hover:text-rose-700'
             }`}
           >
-            <ArrowUpRight className="w-3.5 h-3.5" />
-            <span>Debits</span>
+            <ArrowUpRight className="w-3.5 h-3.5 rtl:rotate-90" />
+            <span>{t('debits')}</span>
           </button>
         </div>
       </div>
@@ -96,24 +98,24 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
             <div className="w-8 h-8 rounded-full border-2 border-[oklch(52%_0.17_232.661)] border-t-transparent animate-spin mb-3" />
-            <p className="text-xs font-medium text-slate-500">Querying Ledger Entries...</p>
+            <p className="text-xs font-medium text-slate-500">{t('queryingLedger')}</p>
           </div>
         ) : !data || data.items.length === 0 ? (
           <div className="text-center py-20 text-slate-400">
             <Filter className="w-10 h-10 mx-auto mb-2 opacity-30 text-slate-400" />
-            <p className="text-sm font-semibold text-slate-700">No transactions found</p>
-            <p className="text-xs text-slate-500 mt-1">Make a Stripe deposit or send funds to start your ledger.</p>
+            <p className="text-sm font-semibold text-slate-700">{t('noTransactions')}</p>
+            <p className="text-xs text-slate-500 mt-1">{t('noTransactionsDesc')}</p>
           </div>
         ) : (
-          <table className="w-full text-left text-xs border-collapse">
+          <table className="w-full text-start text-xs border-collapse">
             <thead>
               <tr className="border-b border-slate-200/80 text-[11px] uppercase tracking-wider text-slate-500 font-semibold bg-slate-50/70">
-                <th className="py-3 px-3">Type</th>
-                <th className="py-3 px-3">Description / Reference</th>
-                <th className="py-3 px-3">Amount</th>
-                <th className="py-3 px-3">Balance After</th>
-                <th className="py-3 px-3">Date</th>
-                <th className="py-3 px-3 text-right">Status</th>
+                <th className="py-3 px-3">{t('type')}</th>
+                <th className="py-3 px-3">{t('descriptionRef')}</th>
+                <th className="py-3 px-3">{t('amount')}</th>
+                <th className="py-3 px-3">{t('balanceAfter')}</th>
+                <th className="py-3 px-3">{t('date')}</th>
+                <th className="py-3 px-3 text-end">{t('status')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -141,11 +143,11 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                           {isCredit ? (
                             <ArrowDownLeft className="w-4 h-4" />
                           ) : (
-                            <ArrowUpRight className="w-4 h-4" />
+                            <ArrowUpRight className="w-4 h-4 rtl:rotate-90" />
                           )}
                         </div>
                         <span className="font-semibold text-slate-800">
-                          {isTopUp ? 'Stripe Deposit' : 'P2P Transfer'}
+                          {isTopUp ? t('stripeDeposit') : t('p2pTransfer')}
                         </span>
                       </div>
                     </td>
@@ -154,7 +156,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                     <td className="py-3 px-3">
                       <div>
                         <p className="font-medium text-slate-900 truncate max-w-[220px]">
-                          {item.description || (isCredit ? 'Received Funds' : 'Sent Funds')}
+                          {item.description || (isCredit ? t('receivedFunds') : t('sentFunds'))}
                         </p>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="font-mono text-[10px] text-slate-500 truncate max-w-[130px]">
@@ -164,7 +166,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                             type="button"
                             onClick={() => copyRef(item.referenceId)}
                             className="text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
-                            title="Copy reference ID"
+                            title={t('copyRefId')}
                           >
                             {copiedId === item.referenceId ? (
                               <Check className="w-3 h-3 text-emerald-600" />
@@ -178,14 +180,14 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
 
                     {/* Amount */}
                     <td className="py-3 px-3 font-mono font-bold text-sm">
-                      <span className={isCredit ? 'text-emerald-600' : 'text-rose-600'}>
+                      <span dir="ltr" className={`inline-block ${isCredit ? 'text-emerald-600' : 'text-rose-600'}`}>
                         {isCredit ? '+' : '-'}${item.amount.toFixed(2)}
                       </span>
                     </td>
 
                     {/* Balance After */}
                     <td className="py-3 px-3 font-mono text-slate-700 text-xs font-semibold">
-                      ${item.balanceAfter.toFixed(2)}
+                      <span dir="ltr">${item.balanceAfter.toFixed(2)}</span>
                     </td>
 
                     {/* Date */}
@@ -199,10 +201,10 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                     </td>
 
                     {/* Status */}
-                    <td className="py-3 px-3 text-right">
+                    <td className="py-3 px-3 text-end">
                       <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                         <CheckCircle2 className="w-3 h-3" />
-                        <span>Completed</span>
+                        <span>{t('completed')}</span>
                       </span>
                     </td>
                   </motion.tr>
@@ -217,8 +219,8 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
       {data && data.totalPages > 1 && (
         <div className="flex items-center justify-between pt-4 mt-2 border-t border-slate-200/80 text-xs text-slate-500">
           <span>
-            Page <span className="font-bold text-slate-900">{data.pageNumber}</span> of{' '}
-            <span className="font-bold text-slate-900">{data.totalPages}</span> ({data.totalCount} entries)
+            {t('page')} <span className="font-bold text-slate-900">{data.pageNumber}</span> {t('of')}{' '}
+            <span className="font-bold text-slate-900">{data.totalPages}</span> ({data.totalCount} {t('entries')})
           </span>
 
           <div className="flex items-center gap-2">
@@ -228,7 +230,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
               onClick={() => onPageChange(page - 1)}
               className="p-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed text-slate-700 shadow-xs transition-colors cursor-pointer"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-4 h-4 rtl:rotate-180" />
             </button>
             <button
               type="button"
@@ -236,7 +238,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
               onClick={() => onPageChange(page + 1)}
               className="p-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed text-slate-700 shadow-xs transition-colors cursor-pointer"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4 rtl:rotate-180" />
             </button>
           </div>
         </div>

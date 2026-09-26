@@ -9,6 +9,7 @@ import {
   CartesianGrid
 } from 'recharts';
 import { TrendingUp, ArrowDownLeft, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import type { TransactionHistoryItem } from '../types';
 
 interface AnalyticsChartProps {
@@ -17,6 +18,7 @@ interface AnalyticsChartProps {
 }
 
 export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency }) => {
+  const { t } = useLanguage();
   // Aggregate transactions by date for the chart
   const chartData = React.useMemo(() => {
     if (!items || items.length === 0) {
@@ -53,9 +55,9 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
         <div>
           <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-[oklch(50%_0.17_232.661)]" />
-            <span>Balance & Cash Flow Dynamics</span>
+            <span>{t('balanceDynamics')}</span>
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">Real-time ledger curve</p>
+          <p className="text-xs text-slate-500 mt-0.5">{t('realTimeCurve')}</p>
         </div>
 
         {/* Mini stats */}
@@ -105,7 +107,7 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
                 color: '#0f172a',
                 boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.08)',
               }}
-              formatter={(value: any) => [`$${Number(value).toFixed(2)} ${currency}`, 'Balance After']}
+              formatter={(value: any) => [`$${Number(value).toFixed(2)} ${currency}`, t('balanceAfter')]}
             />
             <Area
               type="monotone"
