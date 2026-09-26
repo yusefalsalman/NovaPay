@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, ArrowRight, AlertCircle, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
+import { X, ArrowUpRight, ArrowRight, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/api';
 import type { TransferResponse } from '../types';
@@ -101,14 +101,14 @@ export const TransferModal: React.FC<TransferModalProps> = ({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative z-10 w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 text-slate-800 shadow-2xl border border-slate-200/80 overflow-hidden"
+            className="relative z-10 w-full max-w-lg bg-white/95 rounded-3xl p-6 sm:p-8 text-slate-900 shadow-2xl border border-slate-200/80 overflow-hidden"
           >
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-indigo-600 to-emerald-500" />
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[oklch(74.6%_0.16_232.661)] via-blue-600 to-emerald-500" />
 
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200/80">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200">
-                  <Send className="w-5 h-5" />
+                <div className="p-2 rounded-xl bg-[oklch(96%_0.03_232.661)] text-[oklch(45%_0.17_232.661)] border border-[oklch(88%_0.07_232.661)]">
+                  <ArrowUpRight className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900">Instant P2P Transfer</h3>
@@ -138,7 +138,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                 <h4 className="text-xl font-extrabold text-slate-900">Transfer Succeeded!</h4>
                 <p className="text-sm text-slate-600 mt-1">
                   Sent <span className="font-bold text-slate-900">${successData.amount.toFixed(2)} {currency}</span> to{' '}
-                  <span className="font-mono text-indigo-600 font-semibold">{successData.recipientAccountNumber}</span>
+                  <span className="font-mono text-[oklch(45%_0.17_232.661)] font-semibold">{successData.recipientAccountNumber}</span>
                 </p>
 
                 <div className="my-6 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left text-xs space-y-2">
@@ -152,14 +152,14 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                   </div>
                   <div className="flex justify-between text-slate-500">
                     <span>Ledger Status:</span>
-                    <span className="text-indigo-600 font-semibold">Double-Entry Immutably Balanced</span>
+                    <span className="text-[oklch(45%_0.17_232.661)] font-semibold">Double-Entry Immutably Balanced</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md shadow-indigo-600/25 transition-all cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[oklch(55%_0.17_232.661)] to-[oklch(46%_0.16_232.661)] hover:from-[oklch(50%_0.17_232.661)] hover:to-[oklch(42%_0.16_232.661)] text-white font-semibold shadow-md shadow-[oklch(74.6%_0.16_232.661/0.25)] transition-all cursor-pointer"
                 >
                   Done
                 </button>
@@ -178,7 +178,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                 )}
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wider">
                     Recipient Identifier
                   </label>
                   <input
@@ -187,15 +187,15 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                     value={recipient}
                     onChange={(e) => setRecipient(e.target.value)}
                     placeholder="Account Number (NP-2026-...) or Email"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 text-sm text-slate-900 placeholder-slate-400 transition-all font-mono"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[oklch(74.6%_0.16_232.661)] focus:outline-none focus:ring-1 focus:ring-[oklch(74.6%_0.16_232.661)] text-sm text-slate-900 placeholder-slate-400 transition-all font-mono"
                   />
                 </div>
 
                 <div>
                   <div className="flex justify-between text-xs mb-1.5">
-                    <span className="font-semibold text-slate-700 uppercase tracking-wider">Amount ({currency})</span>
+                    <span className="font-semibold text-slate-600 uppercase tracking-wider">Amount ({currency})</span>
                     <span className="text-slate-500">
-                      Balance: <span className="font-bold text-slate-800">${userBalance.toFixed(2)}</span>
+                      Balance: <span className="font-bold text-slate-900">${userBalance.toFixed(2)}</span>
                     </span>
                   </div>
                   <div className="relative">
@@ -208,12 +208,12 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder="0.00"
-                      className="w-full pl-8 pr-16 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 text-lg font-bold text-slate-900 placeholder-slate-400 transition-all font-mono"
+                      className="w-full pl-8 pr-16 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[oklch(74.6%_0.16_232.661)] focus:outline-none focus:ring-1 focus:ring-[oklch(74.6%_0.16_232.661)] text-lg font-bold text-slate-900 placeholder-slate-400 transition-all font-mono"
                     />
                     <button
                       type="button"
                       onClick={() => setAmount(userBalance.toFixed(2))}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition-colors cursor-pointer"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-[oklch(96%_0.03_232.661)] hover:bg-[oklch(90%_0.06_232.661)] text-[oklch(45%_0.17_232.661)] border border-[oklch(88%_0.07_232.661)] text-xs font-bold transition-colors cursor-pointer"
                     >
                       MAX
                     </button>
@@ -225,7 +225,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                         key={p}
                         type="button"
                         onClick={() => setAmount(p.toString())}
-                        className="flex-1 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-medium text-slate-700 transition-all cursor-pointer"
+                        className="flex-1 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700 transition-all cursor-pointer"
                       >
                         +${p}
                       </button>
@@ -234,7 +234,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wider">
                     Reference Note (Optional)
                   </label>
                   <input
@@ -242,11 +242,11 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     placeholder="e.g. Dinner share, rent, coffee"
-                    className="w-full px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 focus:outline-none text-xs text-slate-900 placeholder-slate-400"
+                    className="w-full px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[oklch(74.6%_0.16_232.661)] focus:outline-none text-xs text-slate-900 placeholder-slate-400"
                   />
                 </div>
 
-                <div className="p-3 rounded-xl bg-indigo-50/60 border border-indigo-100 text-xs text-slate-600 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-rose-600 font-semibold">
                     <span>Debit: -${parseFloat(amount) || 0}</span>
                   </div>
@@ -259,7 +259,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold flex items-center justify-center gap-2 shadow-md shadow-indigo-600/25 disabled:opacity-50 transition-all cursor-pointer"
+                  className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[oklch(55%_0.17_232.661)] to-[oklch(46%_0.16_232.661)] hover:from-[oklch(50%_0.17_232.661)] hover:to-[oklch(42%_0.16_232.661)] text-white font-bold flex items-center justify-center gap-2 shadow-md shadow-[oklch(74.6%_0.16_232.661/0.25)] disabled:opacity-50 transition-all cursor-pointer"
                 >
                   {loading ? (
                     <>
@@ -268,7 +268,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4 text-amber-300" />
+                      <ArrowRight className="w-4 h-4" />
                       <span>Confirm & Send Funds</span>
                     </>
                   )}

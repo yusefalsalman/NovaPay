@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  Send, 
-  CreditCard, 
-  FileText, 
-  BrainCircuit, 
-  ShieldCheck, 
-  Cpu, 
-  Activity
+  ArrowUpRight, 
+  PlusCircle, 
+  Receipt, 
+  SlidersHorizontal, 
+  Scale, 
+  Database, 
+  KeyRound
 } from 'lucide-react';
 import { CyberBackground } from './components/CyberBackground';
 import { Navbar } from './components/Navbar';
@@ -170,7 +170,7 @@ export const App: React.FC = () => {
   const currentAccount = user.wallet?.accountNumber ?? 'NP-2026-••••••';
 
   return (
-    <div className="relative min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col">
+    <div className="relative min-h-screen bg-white text-slate-900 flex flex-col">
       <CyberBackground />
 
       <Navbar
@@ -206,60 +206,60 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsTransferOpen(true)}
-                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-indigo-300 transition-all"
+                className="bg-white/95 backdrop-blur-md border border-[oklch(88%_0.07_232.661/0.7)] p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-[oklch(74.6%_0.16_232.661)] hover:scale-[1.02] transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <Send className="w-5 h-5" />
+                <div className="w-11 h-11 rounded-xl bg-[oklch(96%_0.03_232.661)] text-[oklch(50%_0.17_232.661)] border border-[oklch(85%_0.08_232.661)] flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                  <ArrowUpRight className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-slate-900">Send P2P</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Instant Transfer</span>
+                <span className="text-xs font-bold text-slate-900">Transfer</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">Instant P2P</span>
               </button>
 
               {/* Stripe Deposit */}
               <button
                 type="button"
                 onClick={() => setIsDepositOpen(true)}
-                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-emerald-300 transition-all"
+                className="bg-white/95 backdrop-blur-md border border-[oklch(88%_0.07_232.661/0.7)] p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-emerald-400 hover:scale-[1.02] transition-all"
               >
                 <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <CreditCard className="w-5 h-5" />
+                  <PlusCircle className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-slate-900">Top-Up</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Stripe Gateway</span>
+                <span className="text-xs font-bold text-slate-900">Deposit</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">Card Gateway</span>
               </button>
 
               {/* PDF Statement */}
               <button
                 type="button"
                 onClick={() => setIsStatementOpen(true)}
-                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-blue-300 transition-all"
+                className="bg-white/95 backdrop-blur-md border border-[oklch(88%_0.07_232.661/0.7)] p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-sky-400 hover:scale-[1.02] transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <FileText className="w-5 h-5" />
+                <div className="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 border border-sky-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                  <Receipt className="w-5 h-5" />
                 </div>
                 <span className="text-xs font-bold text-slate-900">Statement</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">QuestPDF Export</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">Vector PDF</span>
               </button>
 
-              {/* AI Advisor */}
+              {/* Ledger Intelligence */}
               <button
                 type="button"
                 onClick={() => setIsAiOpen(true)}
-                className="bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-purple-300 transition-all"
+                className="bg-white/95 backdrop-blur-md border border-[oklch(88%_0.07_232.661/0.7)] p-4 rounded-2xl flex flex-col items-center text-center group cursor-pointer shadow-xs hover:shadow-md hover:border-[oklch(74.6%_0.16_232.661)] hover:scale-[1.02] transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 border border-purple-200 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <BrainCircuit className="w-5 h-5" />
+                <div className="w-11 h-11 rounded-xl bg-[oklch(96%_0.03_232.661)] text-[oklch(50%_0.17_232.661)] border border-[oklch(85%_0.08_232.661)] flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                  <SlidersHorizontal className="w-5 h-5" />
                 </div>
-                <span className="text-xs font-bold text-slate-900">AI Insights</span>
-                <span className="text-[10px] text-slate-500 mt-0.5">Gemini Advisor</span>
+                <span className="text-xs font-bold text-slate-900">Analytics</span>
+                <span className="text-[10px] text-slate-500 mt-0.5">Risk & Velocity</span>
               </button>
             </div>
 
             {/* Platform Security & Concurrency Badges */}
-            <div className="bg-white/90 backdrop-blur-md rounded-2xl p-4 border border-slate-200 shadow-xs grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-[oklch(88%_0.07_232.661/0.7)] shadow-xs grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
+                  <Scale className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="font-bold text-slate-900 leading-tight">Double-Entry</p>
@@ -268,8 +268,8 @@ export const App: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0">
-                  <Cpu className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-lg bg-[oklch(96%_0.03_232.661)] border border-[oklch(85%_0.08_232.661)] text-[oklch(45%_0.16_232.661)] flex items-center justify-center shrink-0">
+                  <Database className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="font-bold text-slate-900 leading-tight">Concurrency Safe</p>
@@ -279,7 +279,7 @@ export const App: React.FC = () => {
 
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-purple-50 border border-purple-200 text-purple-600 flex items-center justify-center shrink-0">
-                  <Activity className="w-4 h-4" />
+                  <KeyRound className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="font-bold text-slate-900 leading-tight">Stripe Idempotent</p>

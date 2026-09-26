@@ -2,12 +2,16 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --primary-blue: oklch(74.6% 0.16 232.661);
+    --primary-blue-hover: oklch(68% 0.18 232.661);
+    --primary-blue-deep: oklch(45% 0.17 232.661);
+    --primary-blue-dark: oklch(30% 0.14 232.661);
+    --primary-blue-surface: oklch(97% 0.025 232.661);
+    --primary-blue-border: oklch(88% 0.07 232.661);
   }
 
   body {
-    background-color: #f8fafc;
+    background-color: #ffffff;
     color: #0f172a;
     font-family:
       "Plus Jakarta Sans",
@@ -25,62 +29,72 @@
   }
 }
 
-/* Light Mode Frosted Glass & Surface Panels */
+/* White & Blue Frosted Glass & Surface Panels */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 4px 25px -4px rgba(15, 23, 42, 0.05);
+  border: 1px solid oklch(88% 0.07 232.661 / 0.7);
+  box-shadow: 0 4px 25px -4px rgba(14, 116, 144, 0.06);
 }
 
 .glass-panel-glow {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  box-shadow: 0 16px 40px -12px rgba(99, 102, 241, 0.12);
+  border: 1px solid oklch(74.6% 0.16 232.661 / 0.5);
+  box-shadow: 0 16px 40px -12px oklch(74.6% 0.16 232.661 / 0.22);
 }
 
 .glass-card-interactive {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+  border: 1px solid oklch(88% 0.07 232.661 / 0.7);
+  box-shadow: 0 2px 14px rgba(14, 116, 144, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card-interactive:hover {
-  border-color: rgba(99, 102, 241, 0.45);
-  box-shadow: 0 12px 30px -8px rgba(99, 102, 241, 0.15);
+  border-color: oklch(74.6% 0.16 232.661);
+  box-shadow: 0 12px 30px -8px oklch(74.6% 0.16 232.661 / 0.25);
   transform: translateY(-2px);
   background: #ffffff;
 }
 
 /* Card Gradients */
+.card-gradient-blue {
+  background: linear-gradient(
+    135deg,
+    oklch(35% 0.15 232.661) 0%,
+    oklch(48% 0.17 232.661) 50%,
+    oklch(62% 0.16 232.661) 100%
+  );
+}
+
 .card-gradient-purple {
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #1e293b 100%);
+  background: linear-gradient(
+    135deg,
+    oklch(25% 0.13 232.661) 0%,
+    oklch(38% 0.16 232.661) 50%,
+    oklch(50% 0.17 232.661) 100%
+  );
 }
 
-.card-gradient-platinum {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-}
-
-/* Custom Scrollbar for Light Mode */
+/* Custom Scrollbar for White & Blue Mode */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: oklch(85% 0.08 232.661);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: oklch(74.6% 0.16 232.661);
 }

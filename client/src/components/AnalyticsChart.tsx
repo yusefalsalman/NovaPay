@@ -48,11 +48,11 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
     .reduce((acc, curr) => acc + curr.amount, 0);
 
   return (
-    <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 border border-slate-200/90 shadow-sm text-slate-800 flex flex-col justify-between">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+    <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-6 border border-[oklch(88%_0.07_232.661/0.7)] shadow-xl shadow-slate-200/50 text-slate-800 flex flex-col justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80">
         <div>
           <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-indigo-600" />
+            <TrendingUp className="w-4 h-4 text-[oklch(50%_0.17_232.661)]" />
             <span>Balance & Cash Flow Dynamics</span>
           </h3>
           <p className="text-xs text-slate-500 mt-0.5">Real-time ledger curve</p>
@@ -76,21 +76,21 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
-              <linearGradient id="lightBalanceGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.25} />
-                <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.0} />
+              <linearGradient id="whiteBlueBalanceGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="oklch(74.6% 0.16 232.661)" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="oklch(74.6% 0.16 232.661)" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0, 0, 0, 0.06)" vertical={false} />
             <XAxis 
               dataKey="name" 
-              stroke="#94a3b8" 
-              fontSize={10}
+              stroke="#64748b" 
+              fontSize={10} 
               tickLine={false}
               axisLine={false}
             />
             <YAxis 
-              stroke="#94a3b8" 
+              stroke="#64748b" 
               fontSize={10} 
               tickLine={false}
               axisLine={false}
@@ -99,7 +99,7 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
             <Tooltip
               contentStyle={{
                 backgroundColor: '#ffffff',
-                borderColor: '#e2e8f0',
+                borderColor: 'oklch(88% 0.07 232.661)',
                 borderRadius: '12px',
                 fontSize: '12px',
                 color: '#0f172a',
@@ -110,10 +110,9 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
             <Area
               type="monotone"
               dataKey="balance"
-              stroke="#4f46e5"
+              stroke="oklch(52% 0.17 232.661)"
               strokeWidth={2.5}
-              fillOpacity={1}
-              fill="url(#lightBalanceGradient)"
+              fill="url(#whiteBlueBalanceGradient)"
             />
           </AreaChart>
         </ResponsiveContainer>

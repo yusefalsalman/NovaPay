@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Mail, User as UserIcon, ArrowRight, Loader2, AlertCircle, ShieldCheck, Sparkles } from 'lucide-react';
+import { Lock, Mail, User as UserIcon, ArrowRight, Loader2, AlertCircle, Scale } from 'lucide-react';
+import { NovaLogo } from './NovaLogo';
 import { api } from '../lib/api';
 import type { AuthResponse } from '../types';
 
@@ -57,18 +58,18 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
         initial={{ opacity: 0, y: 25, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="w-full max-w-md bg-white/95 rounded-3xl p-8 border border-slate-200/80 shadow-2xl relative overflow-hidden backdrop-blur-xl"
+        className="w-full max-w-md bg-white/95 rounded-3xl p-8 border border-slate-200/80 shadow-2xl relative overflow-hidden backdrop-blur-xl text-slate-900"
       >
         {/* Ambient Top Glow Line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600" />
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[oklch(74.6%_0.16_232.661)] via-blue-600 to-indigo-600" />
 
         {/* Brand Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 mb-3 shadow-inner">
-            <ShieldCheck className="w-6 h-6" />
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[oklch(96%_0.03_232.661)] border border-[oklch(88%_0.07_232.661)] shadow-sm mb-3">
+            <NovaLogo className="w-7 h-7" />
           </div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900">
-            Nova<span className="text-indigo-600">Pay</span>
+            Nova<span className="text-[oklch(45%_0.17_232.661)]">Pay</span>
           </h1>
           <p className="text-xs text-slate-500 mt-1">
             Enterprise FinTech Digital Wallet & Ledger Engine
@@ -76,7 +77,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
         </div>
 
         {/* Auth Mode Tabs */}
-        <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200/80 mb-6 text-xs font-semibold">
+        <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 mb-6 text-xs font-semibold">
           <button
             type="button"
             onClick={() => {
@@ -84,7 +85,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
               setError(null);
             }}
             className={`flex-1 py-2 rounded-lg transition-all ${
-              isLogin ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'text-slate-600 hover:text-slate-900'
+              isLogin ? 'bg-[oklch(52%_0.17_232.661)] text-white shadow-sm shadow-[oklch(52%_0.17_232.661/0.3)]' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Sign In
@@ -96,7 +97,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
               setError(null);
             }}
             className={`flex-1 py-2 rounded-lg transition-all ${
-              !isLogin ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'text-slate-600 hover:text-slate-900'
+              !isLogin ? 'bg-[oklch(52%_0.17_232.661)] text-white shadow-sm shadow-[oklch(52%_0.17_232.661/0.3)]' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Create Account
@@ -128,7 +129,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-indigo-600 focus:bg-white text-xs text-slate-900 placeholder-slate-400 transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-[oklch(74.6%_0.16_232.661)] focus:ring-1 focus:ring-[oklch(74.6%_0.16_232.661)] text-xs text-slate-900 placeholder-slate-400 transition-all"
                 />
               </div>
             </div>
@@ -146,7 +147,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="yousef@example.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-indigo-600 focus:bg-white text-xs text-slate-900 placeholder-slate-400 transition-all font-mono"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-[oklch(74.6%_0.16_232.661)] focus:ring-1 focus:ring-[oklch(74.6%_0.16_232.661)] text-xs text-slate-900 placeholder-slate-400 transition-all font-mono"
               />
             </div>
           </div>
@@ -163,7 +164,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-indigo-600 focus:bg-white text-xs text-slate-900 placeholder-slate-400 transition-all font-mono"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-[oklch(74.6%_0.16_232.661)] focus:ring-1 focus:ring-[oklch(74.6%_0.16_232.661)] text-xs text-slate-900 placeholder-slate-400 transition-all font-mono"
               />
             </div>
           </div>
@@ -171,7 +172,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/25 disabled:opacity-50 transition-all"
+            className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[oklch(55%_0.17_232.661)] to-[oklch(46%_0.16_232.661)] hover:from-[oklch(50%_0.17_232.661)] hover:to-[oklch(42%_0.16_232.661)] text-white font-bold flex items-center justify-center gap-2 shadow-md shadow-[oklch(74.6%_0.16_232.661/0.25)] disabled:opacity-50 transition-all cursor-pointer"
           >
             {loading ? (
               <>
@@ -188,8 +189,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
         </form>
 
         {/* Footer info */}
-        <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-center gap-2 text-[11px] text-slate-400">
-          <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+        <div className="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-center gap-2 text-[11px] text-slate-500">
+          <Scale className="w-3.5 h-3.5 text-[oklch(45%_0.17_232.661)]" />
           <span>PostgreSQL Double-Entry • Concurrency Safe</span>
         </div>
       </motion.div>

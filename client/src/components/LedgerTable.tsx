@@ -38,13 +38,13 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 border border-slate-200/90 shadow-sm text-slate-800">
+    <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-6 border border-[oklch(88%_0.07_232.661/0.7)] shadow-xl shadow-slate-200/50 text-slate-800">
       {/* Table Header & Controls */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/80">
         <div>
           <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
             <span>Immutable Ledger Activity</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 font-mono font-medium">
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-[oklch(96%_0.03_232.661)] text-[oklch(45%_0.17_232.661)] border border-[oklch(88%_0.07_232.661)] font-mono font-semibold">
               Double-Entry
             </span>
           </h3>
@@ -52,13 +52,13 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200/80 text-xs">
+        <div className="flex items-center gap-1.5 bg-slate-100/90 p-1 rounded-xl border border-slate-200/80 text-xs">
           <button
             type="button"
             onClick={() => onFilterChange('ALL')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
               filterType === 'ALL'
-                ? 'bg-indigo-600 text-white shadow-xs'
+                ? 'bg-[oklch(52%_0.17_232.661)] text-white shadow-sm shadow-[oklch(52%_0.17_232.661/0.3)]'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -69,7 +69,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
             onClick={() => onFilterChange('Credit')}
             className={`px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1 transition-all cursor-pointer ${
               filterType === 'Credit'
-                ? 'bg-emerald-600 text-white shadow-xs'
+                ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/30'
                 : 'text-slate-600 hover:text-emerald-700'
             }`}
           >
@@ -81,7 +81,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
             onClick={() => onFilterChange('Debit')}
             className={`px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1 transition-all cursor-pointer ${
               filterType === 'Debit'
-                ? 'bg-rose-600 text-white shadow-xs'
+                ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
                 : 'text-slate-600 hover:text-rose-700'
             }`}
           >
@@ -95,7 +95,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
       <div className="overflow-x-auto min-h-[300px] mt-2">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
-            <div className="w-8 h-8 rounded-full border-2 border-indigo-600 border-t-transparent animate-spin mb-3" />
+            <div className="w-8 h-8 rounded-full border-2 border-[oklch(52%_0.17_232.661)] border-t-transparent animate-spin mb-3" />
             <p className="text-xs font-medium text-slate-500">Querying Ledger Entries...</p>
           </div>
         ) : !data || data.items.length === 0 ? (
@@ -107,7 +107,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
         ) : (
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-100 text-[11px] uppercase tracking-wider text-slate-500 font-semibold bg-slate-50/60">
+              <tr className="border-b border-slate-200/80 text-[11px] uppercase tracking-wider text-slate-500 font-semibold bg-slate-50/70">
                 <th className="py-3 px-3">Type</th>
                 <th className="py-3 px-3">Description / Reference</th>
                 <th className="py-3 px-3">Amount</th>
@@ -126,7 +126,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                     key={item.ledgerEntryId}
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="hover:bg-slate-50/80 transition-colors group"
+                    className="hover:bg-[oklch(98%_0.02_232.661)] transition-colors group"
                   >
                     {/* Direction / Type */}
                     <td className="py-3 px-3">
@@ -153,11 +153,11 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                     {/* Description & Reference */}
                     <td className="py-3 px-3">
                       <div>
-                        <p className="font-medium text-slate-800 truncate max-w-[220px]">
+                        <p className="font-medium text-slate-900 truncate max-w-[220px]">
                           {item.description || (isCredit ? 'Received Funds' : 'Sent Funds')}
                         </p>
                         <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="font-mono text-[10px] text-slate-400 truncate max-w-[130px]">
+                          <span className="font-mono text-[10px] text-slate-500 truncate max-w-[130px]">
                             {item.referenceId}
                           </span>
                           <button
@@ -184,7 +184,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
                     </td>
 
                     {/* Balance After */}
-                    <td className="py-3 px-3 font-mono text-slate-700 text-xs font-medium">
+                    <td className="py-3 px-3 font-mono text-slate-700 text-xs font-semibold">
                       ${item.balanceAfter.toFixed(2)}
                     </td>
 
@@ -200,7 +200,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
 
                     {/* Status */}
                     <td className="py-3 px-3 text-right">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                         <CheckCircle2 className="w-3 h-3" />
                         <span>Completed</span>
                       </span>
@@ -215,10 +215,10 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
 
       {/* Pagination Footer */}
       {data && data.totalPages > 1 && (
-        <div className="flex items-center justify-between pt-4 mt-2 border-t border-slate-100 text-xs text-slate-500">
+        <div className="flex items-center justify-between pt-4 mt-2 border-t border-slate-200/80 text-xs text-slate-500">
           <span>
-            Page <span className="font-bold text-slate-800">{data.pageNumber}</span> of{' '}
-            <span className="font-bold text-slate-800">{data.totalPages}</span> ({data.totalCount} entries)
+            Page <span className="font-bold text-slate-900">{data.pageNumber}</span> of{' '}
+            <span className="font-bold text-slate-900">{data.totalPages}</span> ({data.totalCount} entries)
           </span>
 
           <div className="flex items-center gap-2">
@@ -226,7 +226,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
               type="button"
               disabled={!data.hasPreviousPage}
               onClick={() => onPageChange(page - 1)}
-              className="p-1.5 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed text-slate-700 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed text-slate-700 shadow-xs transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -234,7 +234,7 @@ export const LedgerTable: React.FC<LedgerTableProps> = ({
               type="button"
               disabled={!data.hasNextPage}
               onClick={() => onPageChange(page + 1)}
-              className="p-1.5 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed text-slate-700 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed text-slate-700 shadow-xs transition-colors cursor-pointer"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
