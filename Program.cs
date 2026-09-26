@@ -1,13 +1,14 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using NovaPay.Models;
-using Stripe;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using NovaPay.Data;
-using NovaPay.Services;
 using NovaPay.Middlewares;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using NovaPay.Models;
+using NovaPay.Services;
+using QuestPDF.Infrastructure;
+using Stripe;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+// Set QuestPDF license (Community License for open-source / individual use)
+QuestPDF.Settings.License = LicenseType.Community;
 
 
 builder.Services.AddDbContext<NovaPayDbContext>(options => options.UseNpgsql(connectionString));
@@ -24,6 +28,16 @@ builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Str
 
 // 2. Set the global SecretKey for Stripe.net SDK
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -72,6 +86,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITransferService, NovaPay.Services.TransferService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IStatementService, StatementService>();
 
 var app = builder.Build();
 
@@ -82,6 +98,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers(); 
