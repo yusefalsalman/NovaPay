@@ -42,6 +42,24 @@ public class PaymentsController : ControllerBase
     }
 
     /// <summary>
+    /// Step 1.5 (Sandbox / Instant): Confirms the PaymentIntent using Stripe's test payment method
+    /// and immediately credits the user's ledger atomically.
+    /// </summary>
+    [Authorize]
+    [HttpPost("confirm-intent/{paymentIntentId}")]
+    public async Task<IActionResult> ConfirmPaymentIntent(string paymentIntentId)
+    {
+        var (success, errorMessage) = await _paymentService.ConfirmPaymentIntentAsync(paymentIntentId);
+
+        if (!success)
+        {
+            return BadRequest(new { message = errorMessage });
+        }
+
+        return Ok(new { message = "Payment successfully confirmed and ledger credited." });
+    }
+
+    /// <summary>
     /// Step 2: Stripe server calls this webhook when the user completes payment
     /// Notice: [AllowAnonymous] because Stripe's servers do not carry your JWT token!
     /// Security is handled via the Stripe-Signature header.
