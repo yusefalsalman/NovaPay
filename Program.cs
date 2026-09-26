@@ -107,8 +107,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
-app.UseCors("AllowAll");
+app.UseRouting();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers(); 
 app.Run();
