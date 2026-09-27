@@ -78,11 +78,11 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
         </div>
 
         {/* Brand Header */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[oklch(96%_0.03_232.661)] border border-[oklch(88%_0.07_232.661)] shadow-sm mb-3">
+        <div className="flex flex-col items-center text-center mb-6">
+          <div className="w-12 h-12 rounded-2xl bg-[oklch(96%_0.03_232.661)] border border-[oklch(88%_0.07_232.661)] shadow-sm flex items-center justify-center mb-3">
             <NovaLogo className="w-7 h-7" />
           </div>
-          <h1 className="text-2xl font-black tracking-tight text-slate-900">
+          <h1 dir="ltr" className="text-2xl font-black tracking-tight text-slate-900 inline-flex items-center">
             Nova<span className="text-[oklch(45%_0.17_232.661)]">Pay</span>
           </h1>
           <p className="text-xs text-slate-500 mt-1">

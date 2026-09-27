@@ -29,13 +29,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[oklch(28%_0.14_232.661)] border border-[oklch(40%_0.16_232.661)] flex items-center justify-center shadow-md shadow-[oklch(74.6%_0.16_232.661/0.3)] shrink-0">
             <NovaLogo className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <div>
-            <span className="text-lg sm:text-xl font-black tracking-tight text-slate-900 flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5">
+            <span dir="ltr" className="text-lg sm:text-xl font-black tracking-tight text-slate-900 inline-flex items-center">
               Nova<span className="text-[oklch(50%_0.17_232.661)]">Pay</span>
-              <span className="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                {t('live')}
-              </span>
+            </span>
+            <span className="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              {t('live')}
             </span>
           </div>
         </div>

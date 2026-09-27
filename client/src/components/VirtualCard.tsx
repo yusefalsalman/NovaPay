@@ -136,11 +136,11 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({
             </div>
 
             {/* NovaPay Logo Mark */}
-            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+            <div dir="ltr" className="flex items-center gap-1 sm:gap-1.5 shrink-0">
               <NovaLogo className="w-4 h-4 sm:w-5 sm:h-5" />
-              <div className="text-right rtl:text-left">
-                <span className="text-sm sm:text-base font-black tracking-tighter">Nova<span className="text-[oklch(74.6%_0.16_232.661)]">Pay</span></span>
-              </div>
+              <span className="text-sm sm:text-base font-black tracking-tighter">
+                Nova<span className="text-[oklch(74.6%_0.16_232.661)]">Pay</span>
+              </span>
             </div>
           </div>
         </div>
