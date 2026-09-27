@@ -142,6 +142,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
                   type="text"
                   required
                   value={fullName}
+                  placeholder='Name'
                   onChange={(e) => setFullName(e.target.value)}
                   className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-[oklch(74.6%_0.16_232.661)] focus:ring-1 focus:ring-[oklch(74.6%_0.16_232.661)] text-xs text-slate-900 placeholder-slate-400 transition-all"
                 />
@@ -160,7 +161,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthSuccess }) => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="yousef@example.com"
+                placeholder="email@example.com"
                 className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-[oklch(74.6%_0.16_232.661)] focus:ring-1 focus:ring-[oklch(74.6%_0.16_232.661)] text-xs text-slate-900 placeholder-slate-400 transition-all font-mono"
               />
             </div>

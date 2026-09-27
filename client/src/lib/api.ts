@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const envUrl = (import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:5218').trim();
+const envUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5218').trim();
 const cleanUrl = envUrl.replace(/\/+$/, '');
 export const API_BASE_URL = cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
 

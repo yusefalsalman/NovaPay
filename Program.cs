@@ -33,10 +33,8 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-policy.WithOrigins(
+        policy.WithOrigins(
         "http://localhost:5173",
-        "https://novapayyousefsalman.netlify.app",
-        "https://novapayyousefsalmanweb.netlify.app",
         "https://nova-pay-rho.vercel.app"
       )
       .AllowAnyHeader()
