@@ -50,8 +50,8 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
     .reduce((acc, curr) => acc + curr.amount, 0);
 
   return (
-    <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-6 border border-[oklch(88%_0.07_232.661/0.7)] shadow-xl shadow-slate-200/50 text-slate-800 flex flex-col justify-between">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80">
+    <div className="bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 border border-[oklch(88%_0.07_232.661/0.7)] shadow-xl shadow-slate-200/50 text-slate-800 flex flex-col justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-slate-200/80">
         <div>
           <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-[oklch(50%_0.17_232.661)]" />
@@ -61,13 +61,13 @@ export const AnalyticsChart: React.FC<AnalyticsChartProps> = ({ items, currency 
         </div>
 
         {/* Mini stats */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] sm:text-xs font-semibold">
             <ArrowDownLeft className="w-3.5 h-3.5" />
             <span>+${totalCredits.toFixed(2)}</span>
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
-            <ArrowUpRight className="w-3.5 h-3.5" />
+          <div className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-[11px] sm:text-xs font-semibold">
+            <ArrowUpRight className="w-3.5 h-3.5 rtl:rotate-90" />
             <span>-${totalDebits.toFixed(2)}</span>
           </div>
         </div>

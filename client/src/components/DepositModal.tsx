@@ -85,7 +85,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -99,7 +99,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative z-10 w-full max-w-lg bg-white/95 rounded-3xl p-6 sm:p-8 text-slate-900 shadow-2xl border border-slate-200/80 overflow-hidden"
+            className="relative z-10 w-full max-w-lg bg-white/95 rounded-2xl sm:rounded-3xl p-5 sm:p-8 text-slate-900 shadow-2xl border border-slate-200/80 my-auto max-h-[92vh] overflow-y-auto"
           >
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-[oklch(74.6%_0.16_232.661)] to-teal-500" />
 

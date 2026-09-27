@@ -66,7 +66,7 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -79,7 +79,7 @@ export const StatementDownloadModal: React.FC<StatementDownloadModalProps> = ({
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative z-10 w-full max-w-md bg-white/95 border border-slate-200/80 rounded-3xl p-6 sm:p-8 text-slate-900 shadow-2xl"
+            className="relative z-10 w-full max-w-md bg-white/95 border border-slate-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-8 text-slate-900 shadow-2xl my-auto max-h-[92vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between pb-4 border-b border-slate-200/80">
               <div className="flex items-center gap-2.5">
