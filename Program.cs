@@ -31,16 +31,11 @@ StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.WithOrigins(
-        "http://localhost:5173",
-        "https://nova-pay-rho.vercel.app"
-      )
-      .AllowAnyHeader()
-      .AllowAnyMethod()
-      .AllowCredentials();
-    });
+    options.AddPolicy("AllowAll",
+        policy => policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -103,7 +98,7 @@ app.UseSwaggerUI();
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseRouting();
-app.UseCors();
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
